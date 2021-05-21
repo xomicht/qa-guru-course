@@ -4,6 +4,8 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -43,22 +45,12 @@ public class Training2 {
         $("#currentAddress").setValue(location);
         $("#react-select-3-input").setValue("Rajasthan").pressEnter();
         $("#react-select-4-input").setValue("Jaipur").pressEnter();
+        $("#uploadPicture").uploadFile(new File("src/test/java/resources/avatar.jpg"));
 
         $("#submit").click();
 
-        $(".table-responsive").shouldHave(
-                text(firstName),
-                text(lastName),
-                text(email),
-                text("Other"),
-                text(mobileNumber),
-                text("01 October,1900"),
-                text("Sports"),
-                text(location),
-                text("Rajasthan Jaipur")
-        );
-
-
+        $(".table-responsive").shouldHave(text(firstName),text(lastName),text(email),text("Other"),
+                text(mobileNumber),text("01 October,1900"),text("Sports"),text("avatar.jpg"),text(location),
+                text("Rajasthan Jaipur"));
     }
-
 }
